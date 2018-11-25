@@ -16,5 +16,5 @@ with open('data.json', 'a+', encoding='utf-8') as file:
 			x = x.split("\n")
 			dat['Username'] = x[2].strip()
 			dat['Firstname'] = re.compile('<td>(.*?)</td>').search(x[4]).group(1)
-			dat['Lastname'] = re.compile('<td>(.*?)</td>').search(x[4]).group(1).strip()
+			dat['Lastname'] = re.compile('<td>(.*?)</td>').search(x[5]).group(1).strip()
 			json.dump(dat,file)
