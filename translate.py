@@ -1,4 +1,4 @@
-import json as simplejson
+import json
 import requests
 import re
 
@@ -10,23 +10,11 @@ x = "\n".join(x).split("</table>")[0]
 pattern=re.compile('<tr>(.*?)</tr>',re.DOTALL)
 data = re.findall(pattern, x)
 dat = {}
-with open('data.txt', 'a+', encoding='utf-8') as file:
+with open('data.json', 'a+', encoding='utf-8') as file:
 	for x in data[2:]:
 			#print(x)
 			x = x.split("\n")
 			dat['Username'] = x[2].strip()
 			dat['Firstname'] = re.compile('<td>(.*?)</td>').search(x[4]).group(1)
 			dat['Lastname'] = re.compile('<td>(.*?)</td>').search(x[4]).group(1).strip()
-			file.write(simplejson.dumps(dat) + "\n")
-
-
-
-
-
-
-#print(x)
-
-#print(str_to_search.split("<table")[1].split("/n")[1:].join("/n").split("</table>")[0])
-#pattern = re.compile(r'<a [^>]*href="([^"]+)')
-#print(ln(str_to_search.split("<table")))
-#print(x)
+			json.dump(dat,file)
